@@ -254,7 +254,13 @@
   .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .form-submit{width:100%;padding:14px;background:var(--cyan);color:var(--ink);border:none;font-family:var(--fd);font-weight:800;font-size:15px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all 0.2s;margin-top:8px}
   .form-submit:hover{background:#22ddff;box-shadow:0 0 24px rgba(0,200,255,0.4)}
+  .form-submit:disabled{opacity:0.5;cursor:not-allowed;background:var(--mid)}
+  .form-submit:disabled:hover{box-shadow:none}
   .form-privacy{font-family:var(--fm);font-size:10px;color:var(--mid);text-align:center;margin-top:14px;letter-spacing:0.05em;line-height:1.6}
+  .form-status{padding:14px 16px;margin:8px 0;border-radius:2px;font-family:var(--fm);font-size:13px;font-weight:500;line-height:1.5;letter-spacing:0.02em}
+  .form-status.success{background:rgba(52,211,153,0.10);color:var(--ok);border:1px solid rgba(52,211,153,0.30)}
+  .form-status.error{background:rgba(248,113,113,0.10);color:var(--danger);border:1px solid rgba(248,113,113,0.30)}
+  .form-status.loading{background:rgba(0,200,255,0.06);color:var(--cyan);border:1px solid var(--border-hi)}
 
   /* ── DIFFERENTIATORS ── */
   .diff{background:var(--ink)}
@@ -843,31 +849,31 @@
         <div class="form-tag">Formulario seguro</div>
         <div class="form-title">Solicitar Demo</div>
 
-        <form id="contactForm">
+        <form id="contactForm" novalidate>
           <div class="form-row">
             <div class="form-group">
               <label for="name">Nombre *</label>
-              <input type="text" id="name" name="name" required placeholder="Tu nombre"/>
+              <input type="text" id="name" name="name" required placeholder="Tu nombre" maxlength="120"/>
             </div>
             <div class="form-group">
               <label for="role">Rol</label>
-              <input type="text" id="role" name="role" placeholder="Director técnico, presidente..."/>
+              <input type="text" id="role" name="role" placeholder="Director técnico, presidente..." maxlength="120"/>
             </div>
           </div>
 
           <div class="form-group">
             <label for="club">Club *</label>
-            <input type="text" id="club" name="club" required placeholder="Nombre del club"/>
+            <input type="text" id="club" name="club" required placeholder="Nombre del club" maxlength="160"/>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label for="email">Email *</label>
-              <input type="email" id="email" name="email" required placeholder="tu@email.com"/>
+              <input type="email" id="email" name="email" required placeholder="tu@email.com" maxlength="160"/>
             </div>
             <div class="form-group">
               <label for="phone">Teléfono</label>
-              <input type="tel" id="phone" name="phone" placeholder="+34"/>
+              <input type="tel" id="phone" name="phone" placeholder="+34" maxlength="40"/>
             </div>
           </div>
 
@@ -883,10 +889,18 @@
 
           <div class="form-group">
             <label for="message">Cuéntanos brevemente</label>
-            <textarea id="message" name="message" placeholder="¿Qué problemas quieres resolver con datos? ¿Cuántos equipos tenéis?"></textarea>
+            <textarea id="message" name="message" placeholder="¿Qué problemas quieres resolver con datos? ¿Cuántos equipos tenéis?" maxlength="2000"></textarea>
           </div>
 
-          <button type="submit" class="form-submit">Enviar solicitud →</button>
+          <!-- Honeypot anti-bot: oculto, no debe rellenarse -->
+          <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+            <label for="website">No rellenar este campo</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off"/>
+          </div>
+
+          <div id="formStatus" class="form-status" style="display:none"></div>
+
+          <button type="submit" id="formSubmit" class="form-submit">Enviar solicitud →</button>
 
           <p class="form-privacy">
             Al enviar, aceptas que te contactemos vía email o teléfono.<br>
@@ -1025,23 +1039,70 @@
     item.addEventListener('click', () => item.classList.toggle('open'));
   });
 
-  // Form submission
+  // Form submission via API
   const form = document.getElementById('contactForm');
+  const formStatus = document.getElementById('formStatus');
+  const formSubmit = document.getElementById('formSubmit');
+  const API_ENDPOINT = 'https://api.xdatik.com/api/contact';
+
+  function showStatus(type, message) {
+    formStatus.style.display = 'block';
+    formStatus.className = 'form-status ' + type;
+    formStatus.textContent = message;
+  }
+
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
+
       const data = new FormData(form);
-      const subject = encodeURIComponent(`Solicitud de Demo X-DATIK — ${data.get('club')}`);
-      const body = encodeURIComponent(
-        `Nombre: ${data.get('name')}\n` +
-        `Rol: ${data.get('role') || '—'}\n` +
-        `Club: ${data.get('club')}\n` +
-        `Email: ${data.get('email')}\n` +
-        `Teléfono: ${data.get('phone') || '—'}\n` +
-        `Plan de interés: ${data.get('plan') || '—'}\n\n` +
-        `Mensaje:\n${data.get('message') || '—'}`
-      );
-      window.location.href = `mailto:lluc@xdatik.com?subject=${subject}&body=${body}`;
+      const payload = {
+        name:    data.get('name'),
+        role:    data.get('role'),
+        club:    data.get('club'),
+        email:   data.get('email'),
+        phone:   data.get('phone'),
+        plan:    data.get('plan'),
+        message: data.get('message'),
+        website: data.get('website'), // honeypot
+      };
+
+      // Validación cliente
+      if (!payload.name || !payload.club || !payload.email) {
+        showStatus('error', 'Por favor, completa los campos obligatorios (nombre, club y email).');
+        return;
+      }
+
+      formSubmit.disabled = true;
+      formSubmit.textContent = 'Enviando...';
+      showStatus('loading', 'Enviando solicitud...');
+
+      try {
+        const response = await fetch(API_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (response.ok && result.success) {
+          showStatus('success', '✓ Solicitud enviada correctamente. Te contactaremos en menos de 24 horas a ' + payload.email + '.');
+          form.reset();
+          formSubmit.textContent = 'Enviado ✓';
+          // Mantener el botón deshabilitado tras éxito
+        } else {
+          const errorMsg = result.error || 'No se pudo enviar la solicitud. Inténtalo de nuevo o escríbenos a lluc@xdatik.com.';
+          showStatus('error', errorMsg);
+          formSubmit.disabled = false;
+          formSubmit.textContent = 'Enviar solicitud →';
+        }
+      } catch (err) {
+        console.error('Error enviando formulario:', err);
+        showStatus('error', 'Error de conexión. Por favor, escríbenos directamente a lluc@xdatik.com.');
+        formSubmit.disabled = false;
+        formSubmit.textContent = 'Enviar solicitud →';
+      }
     });
   }
 </script>
