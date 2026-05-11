@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>X-DATIK — Football Performance Intelligence | Plataforma de datos personalizada para clubes</title>
+<meta name="description" content="Plataforma personalizada de inteligencia de datos físicos y tácticos para clubes de fútbol. Consultoría + tecnología. Desde cantera hasta profesional."/>
+<meta name="theme-color" content="#020812"/>
+
+<!-- Open Graph -->
+<meta property="og:title" content="X-DATIK — Football Performance Intelligence"/>
+<meta property="og:description" content="Datos personalizados para tu club. Decisiones técnicas con respaldo real."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://xdatik.com"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&family=Barlow:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#020812;
+    --deep:#050d1a;
+    --panel:#0a1628;
+    --panel2:#0f1f33;
+    --border:rgba(0,200,255,0.10);
+    --border-hi:rgba(0,200,255,0.30);
+    --muted:#334155;
+    --mid:#64748b;
+    --light:#94a3b8;
+    --white:#f0f6ff;
+    --cyan:#00c8ff;
+    --cyan2:#0ea5e9;
+    --glow:rgba(0,200,255,0.18);
+    --ok:#34d399;
+    --warn:#fbbf24;
+    --danger:#f87171;
+    --violet:#a78bfa;
+    --fd:'Barlow Condensed',sans-serif;
+    --fb:'Barlow',sans-serif;
+    --fm:'JetBrains Mono',monospace;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--white);font-family:var(--fb);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+  /* noise + scanlines */
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity:0.45}
+  body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+    background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px)}
+
+  .display{font-family:var(--fd);line-height:0.92}
+  .mono{font-family:var(--fm)}
+
+  .container{max-width:1280px;margin:0 auto;position:relative;z-index:2}
+
+  .tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--fm);font-size:11px;font-weight:600;
+    color:var(--cyan);letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;
+    border:1px solid var(--border-hi);border-radius:2px;background:rgba(0,200,255,0.06)}
+
+  .grid-bg{position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
+    background-size:60px 60px;
+    mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black 0%,transparent 100%)}
+
+  /* ── NAV ── */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;
+    justify-content:space-between;padding:0 clamp(20px,5vw,60px);height:64px;
+    background:rgba(2,8,18,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+  .nav-brand{display:flex;flex-direction:column;text-decoration:none}
+  .nav-name{font-family:var(--fd);font-weight:900;font-size:22px;color:var(--white);letter-spacing:0.06em}
+  .nav-slogan{font-family:var(--fm);font-size:9px;color:var(--cyan);letter-spacing:0.18em;text-transform:uppercase;margin-top:1px;opacity:0.75}
+  .nav-right{display:flex;align-items:center;gap:28px}
+  .nav-links{display:flex;align-items:center;gap:24px;list-style:none}
+  .nav-links a{font-family:var(--fm);font-size:11px;font-weight:500;color:var(--light);text-decoration:none;transition:color 0.2s;letter-spacing:0.08em;text-transform:uppercase}
+  .nav-links a:hover{color:var(--cyan)}
+  .btn-nav{padding:9px 22px;font-family:var(--fd);font-weight:800;font-size:14px;letter-spacing:0.08em;
+    text-transform:uppercase;background:var(--cyan);color:var(--ink);border:none;border-radius:2px;
+    cursor:pointer;text-decoration:none;transition:all 0.2s;display:inline-block}
+  .btn-nav:hover{background:#22ddff;box-shadow:0 0 24px rgba(0,200,255,0.45);transform:translateY(-1px)}
+
+  .nav-toggle{display:none;background:none;border:1px solid var(--border-hi);color:var(--cyan);padding:8px 12px;font-family:var(--fm);font-size:11px;cursor:pointer;letter-spacing:0.1em}
+
+  /* ── HERO ── */
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;padding:120px clamp(20px,5vw,80px) 80px;overflow:hidden}
+  .hero-orb{position:absolute;top:-25%;left:50%;transform:translateX(-50%);width:900px;height:900px;
+    border-radius:50%;background:radial-gradient(circle,rgba(0,200,255,0.12) 0%,transparent 70%);pointer-events:none}
+  .hero-orb2{position:absolute;bottom:-30%;right:-10%;width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle,rgba(99,102,241,0.08) 0%,transparent 70%);pointer-events:none}
+
+  .hero-eyebrow{margin-bottom:30px;z-index:2;position:relative;animation:fadeUp 0.6s ease forwards;opacity:0}
+  .hero-h1{font-weight:900;font-size:clamp(56px,11vw,144px);color:var(--white);letter-spacing:-0.02em;z-index:2;position:relative;animation:fadeUp 0.8s 0.1s ease forwards;opacity:0;text-shadow:0 0 60px rgba(0,200,255,0.15)}
+  .hero-h1 .ac{color:var(--cyan)}
+  .hero-h1 .dim{color:var(--light);opacity:0.5}
+  .hero-subtitle{max-width:680px;margin:32px auto 0;font-size:18px;color:var(--light);line-height:1.65;font-weight:300;z-index:2;position:relative;animation:fadeUp 0.8s 0.2s ease forwards;opacity:0}
+  .hero-subtitle strong{color:var(--white);font-weight:500}
+  .hero-cta{margin-top:40px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center;z-index:2;position:relative;animation:fadeUp 0.8s 0.3s ease forwards;opacity:0}
+
+  .btn-primary{padding:16px 36px;font-family:var(--fd);font-weight:800;font-size:16px;letter-spacing:0.1em;
+    text-transform:uppercase;background:var(--cyan);color:var(--ink);border:none;border-radius:2px;cursor:pointer;
+    text-decoration:none;transition:all 0.25s;display:inline-flex;align-items:center;gap:10px;
+    box-shadow:0 0 32px rgba(0,200,255,0.2)}
+  .btn-primary:hover{background:#22ddff;box-shadow:0 0 56px rgba(0,200,255,0.55);transform:translateY(-2px)}
+
+  .btn-secondary{padding:16px 32px;font-family:var(--fd);font-weight:700;font-size:15px;letter-spacing:0.1em;
+    text-transform:uppercase;background:transparent;color:var(--white);border:1px solid var(--border-hi);
+    border-radius:2px;cursor:pointer;text-decoration:none;transition:all 0.2s}
+  .btn-secondary:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,200,255,0.04)}
+
+  .hero-metrics{margin-top:80px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;width:100%;max-width:900px;
+    border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:24px 0;z-index:2;position:relative;
+    animation:fadeUp 0.8s 0.45s ease forwards;opacity:0}
+  .hero-metric{text-align:center;padding:0 12px;border-right:1px solid var(--border)}
+  .hero-metric:last-child{border-right:none}
+  .hero-metric .v{font-family:var(--fd);font-weight:900;font-size:32px;color:var(--cyan);line-height:1}
+  .hero-metric .l{font-family:var(--fm);font-size:9px;color:var(--light);letter-spacing:0.15em;text-transform:uppercase;margin-top:6px}
+
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(24px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  /* ── TICKER ── */
+  .ticker-wrap{background:var(--deep);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:18px 0;position:relative;z-index:2}
+  .ticker{display:flex;gap:48px;animation:ticker 40s linear infinite;white-space:nowrap}
+  .ticker-item{font-family:var(--fm);font-size:12px;color:var(--light);letter-spacing:0.15em;text-transform:uppercase;display:inline-flex;align-items:center;gap:12px;flex-shrink:0}
+  .ticker-item::before{content:'◢';color:var(--cyan);font-size:10px}
+  @keyframes ticker{
+    0%{transform:translateX(0)}
+    100%{transform:translateX(-50%)}
+  }
+
+  /* ── SECTIONS ── */
+  section{position:relative;padding:120px clamp(20px,5vw,80px) 100px;z-index:2}
+  .section-label{font-family:var(--fm);font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  .section-label::before{content:'';width:32px;height:1px;background:var(--cyan)}
+  .section-h2{font-family:var(--fd);font-size:clamp(40px,7vw,88px);font-weight:900;line-height:0.9;letter-spacing:-0.02em;margin-bottom:24px}
+  .section-h2 .ac{color:var(--cyan)}
+  .section-lead{font-size:18px;color:var(--light);font-weight:300;max-width:640px;line-height:1.65;margin-bottom:48px}
+
+  /* ── ABOUT (Quiénes somos) ── */
+  .about{background:var(--deep)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+  .about-left h2{font-family:var(--fd);font-size:clamp(36px,5vw,72px);font-weight:900;line-height:0.92;letter-spacing:-0.02em}
+  .about-left h2 .ac{color:var(--cyan)}
+  .about-right p{font-size:17px;line-height:1.75;color:var(--light);margin-bottom:24px;font-weight:300}
+  .about-right p strong{color:var(--white);font-weight:500}
+  .about-pillars{margin-top:32px;display:flex;flex-direction:column;gap:20px}
+  .pillar{display:flex;gap:18px;align-items:flex-start;padding:20px;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--cyan)}
+  .pillar-num{font-family:var(--fd);font-weight:900;font-size:32px;color:var(--cyan);line-height:1;min-width:48px}
+  .pillar-content h4{font-family:var(--fd);font-weight:800;font-size:17px;color:var(--white);margin-bottom:6px;letter-spacing:0.02em}
+  .pillar-content p{font-size:14px;color:var(--light);margin:0;line-height:1.55}
+
+  /* ── FEATURES ── */
+  .features{background:var(--ink)}
+  .features-header{text-align:center;max-width:720px;margin:0 auto 64px;display:flex;flex-direction:column;align-items:center}
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .feature{background:var(--panel);border:1px solid var(--border);padding:32px;transition:all 0.25s;position:relative;overflow:hidden}
+  .feature::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--cyan);transform:scaleX(0);transform-origin:left;transition:transform 0.3s}
+  .feature:hover{border-color:var(--border-hi);transform:translateY(-2px);background:var(--panel2)}
+  .feature:hover::before{transform:scaleX(1)}
+  .feature-icon{width:56px;height:56px;border:1px solid var(--border-hi);display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:24px;color:var(--cyan);margin-bottom:24px;background:rgba(0,200,255,0.05)}
+  .feature-tag{font-family:var(--fm);font-size:10px;color:var(--cyan);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px}
+  .feature h3{font-family:var(--fd);font-weight:800;font-size:22px;color:var(--white);margin-bottom:12px;letter-spacing:0.02em}
+  .feature p{font-size:14px;color:var(--light);line-height:1.65;font-weight:300}
+  .feature ul{margin-top:16px;list-style:none}
+  .feature ul li{font-size:13px;color:var(--mid);padding:4px 0;padding-left:18px;position:relative}
+  .feature ul li::before{content:'›';color:var(--cyan);position:absolute;left:0;font-weight:700}
+
+  /* ── PRICING ── */
+  .pricing{background:var(--deep);padding-bottom:120px}
+  .pricing-header{text-align:center;max-width:720px;margin:0 auto 64px;display:flex;flex-direction:column;align-items:center}
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px}
+  .plan{background:var(--panel);border:1px solid var(--border);padding:36px 30px;position:relative;display:flex;flex-direction:column;transition:all 0.25s}
+  .plan:hover{border-color:var(--border-hi);transform:translateY(-2px)}
+  .plan.featured{border-color:var(--cyan);background:linear-gradient(180deg,rgba(0,200,255,0.04),var(--panel));box-shadow:0 0 60px rgba(0,200,255,0.08)}
+  .plan-badge{position:absolute;top:-12px;left:30px;background:var(--cyan);color:var(--ink);font-family:var(--fm);font-size:10px;font-weight:700;letter-spacing:0.15em;padding:5px 12px;border-radius:2px;text-transform:uppercase}
+  .plan-name{font-family:var(--fd);font-weight:900;font-size:32px;color:var(--white);letter-spacing:0.02em;margin-bottom:6px}
+  .plan-target{font-family:var(--fm);font-size:11px;color:var(--cyan);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:24px}
+  .plan-price{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+  .plan-price .v{font-family:var(--fd);font-weight:900;font-size:48px;color:var(--white);line-height:1}
+  .plan-price .from{font-family:var(--fm);font-size:11px;color:var(--light);letter-spacing:0.1em;text-transform:uppercase}
+  .plan-period{font-family:var(--fm);font-size:12px;color:var(--light);margin-bottom:20px}
+  .plan-setup{padding:14px 16px;background:var(--ink);border:1px solid var(--border);margin-bottom:24px;font-size:13px;color:var(--light)}
+  .plan-setup strong{color:var(--cyan);font-family:var(--fm);font-size:13px;font-weight:600;display:block;margin-bottom:2px;letter-spacing:0.05em}
+  .plan-features{list-style:none;margin:0 0 28px;flex-grow:1}
+  .plan-features li{font-size:14px;color:var(--light);padding:9px 0;padding-left:26px;position:relative;line-height:1.5;border-bottom:1px solid var(--border)}
+  .plan-features li:last-child{border-bottom:none}
+  .plan-features li::before{content:'✓';color:var(--cyan);position:absolute;left:0;font-weight:700;font-size:14px}
+  .plan-features li.minus{color:var(--mid)}
+  .plan-features li.minus::before{content:'—';color:var(--muted)}
+  .plan-features li strong{color:var(--white);font-weight:500}
+  .plan-cta{display:block;width:100%;padding:14px;text-align:center;font-family:var(--fd);font-weight:800;font-size:15px;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.2s}
+  .plan-cta.primary{background:var(--cyan);color:var(--ink)}
+  .plan-cta.primary:hover{background:#22ddff;box-shadow:0 0 24px rgba(0,200,255,0.4)}
+  .plan-cta.outline{background:transparent;color:var(--white);border:1px solid var(--border-hi)}
+  .plan-cta.outline:hover{border-color:var(--cyan);color:var(--cyan)}
+
+  .pricing-extras{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:0 auto;padding:32px;background:var(--panel);border:1px solid var(--border)}
+  .extra{display:flex;gap:16px;align-items:flex-start}
+  .extra-icon{font-family:var(--fm);font-size:18px;color:var(--cyan);min-width:30px}
+  .extra h5{font-family:var(--fd);font-weight:700;font-size:16px;color:var(--white);margin-bottom:4px;letter-spacing:0.02em}
+  .extra p{font-size:13px;color:var(--light);line-height:1.55;margin:0}
+
+  .pricing-footnote{text-align:center;margin-top:32px;font-family:var(--fm);font-size:12px;color:var(--mid);letter-spacing:0.05em}
+  .pricing-footnote strong{color:var(--cyan);font-weight:600}
+
+  /* ── ROADMAP ── */
+  .roadmap{background:var(--ink);overflow:hidden}
+  .roadmap-header{text-align:center;max-width:720px;margin:0 auto 80px;display:flex;flex-direction:column;align-items:center}
+  .roadmap-timeline{position:relative;max-width:1000px;margin:0 auto}
+  .roadmap-timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--cyan) 10%,var(--cyan) 90%,transparent);transform:translateX(-50%)}
+  .roadmap-item{display:grid;grid-template-columns:1fr auto 1fr;gap:32px;margin-bottom:60px;align-items:center}
+  .roadmap-item:last-child{margin-bottom:0}
+  .roadmap-card{background:var(--panel);border:1px solid var(--border);padding:28px;transition:all 0.25s}
+  .roadmap-card:hover{border-color:var(--border-hi);background:var(--panel2)}
+  .roadmap-card.now{border-color:var(--cyan);box-shadow:0 0 32px rgba(0,200,255,0.1)}
+  .roadmap-card h3{font-family:var(--fd);font-weight:900;font-size:28px;color:var(--white);letter-spacing:0.02em;margin-bottom:8px}
+  .roadmap-card h3 .ac{color:var(--cyan)}
+  .roadmap-status{font-family:var(--fm);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;padding:3px 10px;display:inline-block;margin-bottom:16px;border-radius:2px}
+  .roadmap-status.live{background:rgba(52,211,153,0.12);color:var(--ok);border:1px solid rgba(52,211,153,0.3)}
+  .roadmap-status.coming{background:rgba(0,200,255,0.08);color:var(--cyan);border:1px solid var(--border-hi)}
+  .roadmap-status.future{background:rgba(167,139,250,0.08);color:var(--violet);border:1px solid rgba(167,139,250,0.25)}
+  .roadmap-card p{font-size:14px;color:var(--light);line-height:1.6;font-weight:300}
+  .roadmap-dot{width:18px;height:18px;border-radius:50%;background:var(--ink);border:2px solid var(--cyan);position:relative;z-index:2}
+  .roadmap-dot.now{background:var(--cyan);box-shadow:0 0 16px var(--cyan)}
+  .roadmap-item.right .roadmap-card{grid-column:3}
+  .roadmap-item.right .roadmap-spacer{grid-column:1}
+  .roadmap-spacer{display:block}
+
+  /* ── DEMO / CTA ── */
+  .demo{background:var(--deep);position:relative;overflow:hidden}
+  .demo::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
+  .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .demo-left h2{font-family:var(--fd);font-size:clamp(40px,6vw,80px);font-weight:900;line-height:0.92;letter-spacing:-0.02em;margin-bottom:24px}
+  .demo-left h2 .ac{color:var(--cyan)}
+  .demo-left p{font-size:17px;color:var(--light);line-height:1.7;margin-bottom:32px;font-weight:300}
+  .demo-bullets{list-style:none;margin-bottom:36px}
+  .demo-bullets li{font-size:14px;color:var(--light);padding:10px 0;padding-left:28px;position:relative;border-bottom:1px dashed var(--border)}
+  .demo-bullets li::before{content:'⬡';color:var(--cyan);position:absolute;left:0;font-size:14px}
+
+  .demo-form{background:var(--panel);border:1px solid var(--border-hi);padding:36px;position:relative}
+  .demo-form::before{content:'';position:absolute;top:-1px;left:-1px;right:-1px;height:2px;background:var(--cyan)}
+  .form-tag{font-family:var(--fm);font-size:11px;color:var(--cyan);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px}
+  .form-title{font-family:var(--fd);font-weight:900;font-size:28px;color:var(--white);margin-bottom:24px;letter-spacing:0.02em}
+  .form-group{margin-bottom:18px}
+  .form-group label{display:block;font-family:var(--fm);font-size:11px;color:var(--light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+  .form-group input,.form-group select,.form-group textarea{width:100%;background:var(--ink);border:1px solid var(--border);color:var(--white);padding:12px 14px;font-family:var(--fb);font-size:14px;border-radius:2px;transition:border-color 0.2s}
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 1px var(--cyan)}
+  .form-group textarea{resize:vertical;min-height:90px;font-family:var(--fb)}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .form-submit{width:100%;padding:14px;background:var(--cyan);color:var(--ink);border:none;font-family:var(--fd);font-weight:800;font-size:15px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all 0.2s;margin-top:8px}
+  .form-submit:hover{background:#22ddff;box-shadow:0 0 24px rgba(0,200,255,0.4)}
+  .form-privacy{font-family:var(--fm);font-size:10px;color:var(--mid);text-align:center;margin-top:14px;letter-spacing:0.05em;line-height:1.6}
+
+  /* ── DIFFERENTIATORS ── */
+  .diff{background:var(--ink)}
+  .diff-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
+  .diff-item{background:var(--panel);border:1px solid var(--border);padding:28px;display:flex;gap:20px;align-items:flex-start;transition:all 0.25s}
+  .diff-item:hover{border-color:var(--border-hi);background:var(--panel2)}
+  .diff-num{font-family:var(--fd);font-weight:900;font-size:48px;color:var(--cyan);line-height:1;min-width:56px;opacity:0.9}
+  .diff-item h4{font-family:var(--fd);font-weight:800;font-size:20px;color:var(--white);margin-bottom:8px;letter-spacing:0.02em}
+  .diff-item p{font-size:14px;color:var(--light);line-height:1.6;font-weight:300}
+
+  /* ── FAQ ── */
+  .faq{background:var(--deep)}
+  .faq-list{max-width:880px;margin:48px auto 0}
+  .faq-item{border-bottom:1px solid var(--border);padding:20px 0;cursor:pointer}
+  .faq-question{display:flex;justify-content:space-between;align-items:center;font-family:var(--fd);font-weight:700;font-size:18px;color:var(--white);letter-spacing:0.02em}
+  .faq-question .icn{color:var(--cyan);font-family:var(--fm);font-size:18px;transition:transform 0.25s;font-weight:400}
+  .faq-item.open .faq-question .icn{transform:rotate(45deg)}
+  .faq-answer{max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.25s ease;color:var(--light);font-size:15px;line-height:1.7;font-weight:300}
+  .faq-item.open .faq-answer{max-height:400px;padding-top:14px}
+
+  /* ── FOOTER ── */
+  footer{background:var(--ink);border-top:1px solid var(--border);padding:60px clamp(20px,5vw,80px) 30px;position:relative;z-index:2}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;max-width:1280px;margin:0 auto 40px}
+  .footer-brand .nav-name{font-size:28px}
+  .footer-brand p{font-size:13px;color:var(--light);margin-top:12px;line-height:1.65;max-width:280px;font-weight:300}
+  .footer-col h5{font-family:var(--fm);font-size:11px;color:var(--cyan);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:14px}
+  .footer-col a{display:block;font-size:13px;color:var(--light);text-decoration:none;padding:5px 0;transition:color 0.2s}
+  .footer-col a:hover{color:var(--cyan)}
+  .footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;align-items:center;max-width:1280px;margin:0 auto;font-family:var(--fm);font-size:11px;color:var(--mid);letter-spacing:0.05em;flex-wrap:wrap;gap:16px}
+  .footer-bottom .status{display:flex;align-items:center;gap:8px}
+  .footer-bottom .status::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok);animation:pulse 2s infinite}
+  @keyframes pulse{
+    0%,100%{opacity:1}
+    50%{opacity:0.4}
+  }
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal{opacity:0;transform:translateY(28px);transition:all 0.7s ease}
+  .reveal.show{opacity:1;transform:translateY(0)}
+  .reveal.d1{transition-delay:0.1s}
+  .reveal.d2{transition-delay:0.2s}
+  .reveal.d3{transition-delay:0.3s}
+  .reveal.d4{transition-delay:0.4s}
+
+  /* ── RESPONSIVE ── */
+  @media (max-width:980px){
+    .nav-toggle{display:block}
+    .nav-links{display:none}
+    .nav-links.open{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--ink);border-bottom:1px solid var(--border);padding:24px;gap:18px}
+    .features-grid,.pricing-grid,.diff-grid{grid-template-columns:1fr}
+    .pricing-extras{grid-template-columns:1fr}
+    .about-grid,.demo-grid{grid-template-columns:1fr;gap:40px}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+    .hero-metrics{grid-template-columns:repeat(2,1fr)}
+    .hero-metric{border-right:none;border-bottom:1px solid var(--border);padding:16px}
+    .form-row{grid-template-columns:1fr}
+    .roadmap-timeline::before{left:20px}
+    .roadmap-item{grid-template-columns:48px 1fr;gap:20px}
+    .roadmap-item.right .roadmap-card,.roadmap-item .roadmap-card{grid-column:2;text-align:left}
+    .roadmap-item.right .roadmap-spacer,.roadmap-spacer{display:none}
+    .roadmap-dot{margin-left:11px}
+  }
+  @media (max-width:600px){
+    .footer-grid{grid-template-columns:1fr}
+    section{padding:80px 20px 70px}
+    .hero{padding:100px 20px 50px}
+    .hero-metrics{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#" class="nav-brand">
+    <span class="nav-name">X-DATIK</span>
+    <span class="nav-slogan">Football Performance Intelligence</span>
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">Quiénes somos</a></li>
+      <li><a href="#features">Plataforma</a></li>
+      <li><a href="#pricing">Planes</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+      <li><a href="#demo">Contacto</a></li>
+    </ul>
+    <a href="https://app.xdatik.com" class="btn-nav">Acceder</a>
+    <button class="nav-toggle" id="navToggle">≡ MENU</button>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="grid-bg"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+
+  <div class="hero-eyebrow">
+    <span class="tag">⬡ Plataforma personalizada · Consultoría · IA</span>
+  </div>
+
+  <h1 class="display hero-h1">
+    DATOS QUE<br>
+    <span class="ac">DECIDEN</span><br>
+    <span class="dim">PARTIDOS.</span>
+  </h1>
+
+  <p class="hero-subtitle">
+    La única plataforma de inteligencia deportiva <strong>diseñada a medida de tu club</strong>. 
+    Unificamos GPS, vídeo táctico e IA conversacional en una herramienta que se adapta 
+    a tu metodología — no al revés.
+  </p>
+
+  <div class="hero-cta">
+    <a href="#demo" class="btn-primary">Solicitar Demo →</a>
+    <a href="#pricing" class="btn-secondary">Ver Planes</a>
+  </div>
+
+  <div class="hero-metrics">
+    <div class="hero-metric">
+      <div class="v">100%</div>
+      <div class="l">Personalizado</div>
+    </div>
+    <div class="hero-metric">
+      <div class="v">2</div>
+      <div class="l">Fuentes integradas</div>
+    </div>
+    <div class="hero-metric">
+      <div class="v">IA</div>
+      <div class="l">Conversacional</div>
+    </div>
+    <div class="hero-metric">
+      <div class="v">24/7</div>
+      <div class="l">Acceso web</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TICKER ─── -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item">Chip GPS Data</span>
+    <span class="ticker-item">Cámara Táctica</span>
+    <span class="ticker-item">Intelligence IA</span>
+    <span class="ticker-item">Análisis por Partido</span>
+    <span class="ticker-item">Evolución Temporal</span>
+    <span class="ticker-item">Comparativa Jugadores</span>
+    <span class="ticker-item">Reports PDF</span>
+    <span class="ticker-item">Multi-equipo</span>
+    <span class="ticker-item">Cantera + Profesional</span>
+    <span class="ticker-item">Soporte Directo</span>
+    <span class="ticker-item">Chip GPS Data</span>
+    <span class="ticker-item">Cámara Táctica</span>
+    <span class="ticker-item">Intelligence IA</span>
+    <span class="ticker-item">Análisis por Partido</span>
+    <span class="ticker-item">Evolución Temporal</span>
+    <span class="ticker-item">Comparativa Jugadores</span>
+    <span class="ticker-item">Reports PDF</span>
+    <span class="ticker-item">Multi-equipo</span>
+    <span class="ticker-item">Cantera + Profesional</span>
+    <span class="ticker-item">Soporte Directo</span>
+  </div>
+</div>
+
+<!-- ─── ABOUT (Qué es X-DATIK) ─── -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left">
+        <p class="section-label reveal">Quiénes somos</p>
+        <h2 class="reveal d1">NO SOMOS<br>UN <span class="ac">SOFTWARE.</span><br>SOMOS TU<br><span class="ac">EQUIPO</span> DE DATOS.</h2>
+      </div>
+      <div class="about-right">
+        <p class="reveal">
+          X-DATIK no es una herramienta más de análisis. Es una <strong>consultoría tecnológica especializada en fútbol</strong> 
+          que combina una plataforma propia con servicio de personalización continua.
+        </p>
+        <p class="reveal d1">
+          Cada club que trabaja con nosotros recibe su versión de X-DATIK adaptada a su metodología, 
+          terminología y necesidades. Sin compromisos rígidos. Sin "talla única".
+        </p>
+
+        <div class="about-pillars">
+          <div class="pillar reveal d1">
+            <div class="pillar-num">01</div>
+            <div class="pillar-content">
+              <h4>Plataforma como base</h4>
+              <p>Una aplicación web sólida con todas las funcionalidades core que un club profesional necesita desde el día uno.</p>
+            </div>
+          </div>
+          <div class="pillar reveal d2">
+            <div class="pillar-num">02</div>
+            <div class="pillar-content">
+              <h4>Consultoría continua</h4>
+              <p>Mantenimiento, actualizaciones y desarrollos a medida. Pagas solo lo que usas. Sin sobrecostes inesperados.</p>
+            </div>
+          </div>
+          <div class="pillar reveal d3">
+            <div class="pillar-num">03</div>
+            <div class="pillar-content">
+              <h4>Soporte directo</h4>
+              <p>Sin tickets perdidos, sin call centers. Contacto directo con el equipo de producto que conoce tu plataforma al detalle.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURES ─── -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="features-header">
+      <p class="section-label reveal">Plataforma</p>
+      <h2 class="section-h2 reveal d1">INTELIGENCIA<br><span class="ac">360°</span></h2>
+      <p class="section-lead reveal d2">
+        Módulos integrados que cubren cada dimensión del rendimiento. Desde la carga física 
+        individual hasta el análisis táctico colectivo, con IA conversacional para acelerar 
+        la toma de decisiones.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature reveal">
+        <div class="feature-icon">◢</div>
+        <p class="feature-tag">Físico · GPS</p>
+        <h3>Chip Data</h3>
+        <p>Carga de archivos GPS de tus dispositivos. Visualización clara de distancia, sprints, aceleraciones, frecuencia cardiaca y zonas de intensidad.</p>
+        <ul>
+          <li>Métricas individuales y de equipo</li>
+          <li>Comparativa entre sesiones</li>
+          <li>Detección de carga acumulada</li>
+        </ul>
+      </div>
+
+      <div class="feature reveal d1">
+        <div class="feature-icon">◇</div>
+        <p class="feature-tag">Táctico · Video</p>
+        <h3>Camera Data</h3>
+        <p>Estadísticas tácticas extraídas de tu sistema de cámara. Posesión, pases, duelos, tiros y métricas avanzadas por jugador y equipo.</p>
+        <ul>
+          <li>Stats colectivos y por jugador</li>
+          <li>Análisis ofensivo y defensivo</li>
+          <li>Jugadas a balón parado</li>
+        </ul>
+      </div>
+
+      <div class="feature reveal d2">
+        <div class="feature-icon">∞</div>
+        <p class="feature-tag">IA · Asistente</p>
+        <h3>Intelligence</h3>
+        <p>Asistente conversacional entrenado con los datos de tu club. Pregunta lo que necesites: análisis, comparativas, recomendaciones tácticas. Disponible en el plan Pro y Elite.</p>
+        <ul>
+          <li>Consultas en lenguaje natural</li>
+          <li>Reports automáticos</li>
+          <li>Análisis post-partido</li>
+        </ul>
+      </div>
+
+      <div class="feature reveal">
+        <div class="feature-icon">⬢</div>
+        <p class="feature-tag">Análisis</p>
+        <h3>Evolución</h3>
+        <p>Sigue la evolución física y táctica de cada jugador a lo largo de la temporada. Detecta tendencias antes que sea tarde.</p>
+        <ul>
+          <li>Gráficas multi-métrica</li>
+          <li>Filtros por periodo</li>
+          <li>Alertas de descenso</li>
+        </ul>
+      </div>
+
+      <div class="feature reveal d1">
+        <div class="feature-icon">⇆</div>
+        <p class="feature-tag">Comparativa</p>
+        <h3>Match Compare</h3>
+        <p>Compara dos partidos uno al lado del otro. Encuentra diferencias clave entre victorias y derrotas, locales y visitantes, distintos rivales.</p>
+        <ul>
+          <li>Comparación lado a lado</li>
+          <li>Diferencias destacadas</li>
+          <li>Patrones tácticos</li>
+        </ul>
+      </div>
+
+      <div class="feature reveal d2">
+        <div class="feature-icon">◯</div>
+        <p class="feature-tag">Multi-equipo</p>
+        <h3>Estructura Club</h3>
+        <p>Gestiona desde la primera plantilla hasta el último equipo de cantera. Roles diferenciados, datos separados, visión global.</p>
+        <ul>
+          <li>Jerarquía Club → Equipos → Jugadores</li>
+          <li>Roles: admin, staff, viewer</li>
+          <li>Permisos granulares</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICING ─── -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="pricing-header">
+      <p class="section-label reveal">Planes</p>
+      <h2 class="section-h2 reveal d1">INVERSIÓN<br><span class="ac">TRANSPARENTE</span></h2>
+      <p class="section-lead reveal d2">
+        Tres niveles según las necesidades reales de tu club. Setup inicial + cuota mensual + 
+        consultoría flexible. Sin sobresaltos.
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- ESSENTIAL -->
+      <div class="plan reveal">
+        <div class="plan-name">Essential</div>
+        <div class="plan-target">Cantera · Semi-pro</div>
+
+        <div class="plan-price">
+          <span class="v">595€</span>
+          <span class="from">/mes</span>
+        </div>
+        <div class="plan-period">IVA incluido · Pago mensual</div>
+
+        <div class="plan-setup">
+          <strong>Setup inicial</strong>
+          4.500€ · pago único en 3 plazos sin intereses
+        </div>
+
+        <ul class="plan-features">
+          <li>Plataforma completa <strong>app.xdatik.com</strong></li>
+          <li>Chip Data + Camera Data integrados</li>
+          <li>Hasta <strong>3 equipos</strong> del club</li>
+          <li>Hasta <strong>10 usuarios</strong> staff técnico</li>
+          <li><strong>10h/mes</strong> de mantenimiento</li>
+          <li>Soporte por email · respuesta 24h</li>
+          <li class="minus">Sin consultas con IA</li>
+          <li class="minus">Sin personalización avanzada</li>
+        </ul>
+
+        <a href="#demo" class="plan-cta outline">Solicitar Demo</a>
+      </div>
+
+      <!-- PRO -->
+      <div class="plan featured reveal d1">
+        <div class="plan-badge">Más popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-target">Para clubes serios</div>
+
+        <div class="plan-price">
+          <span class="v">1.195€</span>
+          <span class="from">/mes</span>
+        </div>
+        <div class="plan-period">IVA incluido · Pago mensual</div>
+
+        <div class="plan-setup">
+          <strong>Setup inicial</strong>
+          8.000€ · pago único en 3 plazos sin intereses
+        </div>
+
+        <ul class="plan-features">
+          <li>Todo lo del plan Essential</li>
+          <li>Hasta <strong>8 equipos</strong> del club</li>
+          <li>Hasta <strong>25 usuarios</strong> staff técnico</li>
+          <li><strong>Intelligence IA</strong> · Consultas con IA incluidas</li>
+          <li><strong>10h/mes</strong> de mantenimiento</li>
+          <li>Soporte prioritario · respuesta 4h</li>
+          <li>Personalización media a medida</li>
+          <li>Reports PDF personalizados</li>
+        </ul>
+
+        <a href="#demo" class="plan-cta primary">Solicitar Demo →</a>
+      </div>
+
+      <!-- ELITE -->
+      <div class="plan reveal d2">
+        <div class="plan-name">Elite</div>
+        <div class="plan-target">Clubes profesionales</div>
+
+        <div class="plan-price">
+          <span class="from">DESDE</span>
+          <span class="v">1.795€</span>
+          <span class="from">/mes</span>
+        </div>
+        <div class="plan-period">IVA incluido · Pago mensual</div>
+
+        <div class="plan-setup">
+          <strong>Setup inicial</strong>
+          desde 12.000€ · adaptado al alcance
+        </div>
+
+        <ul class="plan-features">
+          <li>Todo lo del plan Pro</li>
+          <li><strong>Equipos y usuarios ilimitados</strong></li>
+          <li>Consultas con IA <strong>ampliadas</strong></li>
+          <li>Personalización avanzada continua</li>
+          <li>Integraciones a medida con tus sistemas</li>
+          <li><strong>SLA</strong> garantizado · respuesta 1h</li>
+          <li>Onboarding presencial</li>
+          <li>Consultor dedicado</li>
+        </ul>
+
+        <a href="#demo" class="plan-cta outline">Hablar con ventas</a>
+      </div>
+    </div>
+
+    <div class="pricing-extras">
+      <div class="extra">
+        <div class="extra-icon">⌚</div>
+        <div>
+          <h5>Consultoría extra</h5>
+          <p>Si necesitas más horas de desarrollo a medida: 100€/h en paquetes de 10h, 25h o 50h. 
+             Antes de empezar acordamos plan de horas. Desviación máxima del 5%.</p>
+        </div>
+      </div>
+      <div class="extra">
+        <div class="extra-icon">∞</div>
+        <div>
+          <h5>Más consultas IA</h5>
+          <p>¿Necesitas más capacidad de Intelligence? Paquetes adicionales según uso real. 
+             Sin tarifas planas escondidas. Solo pagas lo que consumes.</p>
+        </div>
+      </div>
+      <div class="extra">
+        <div class="extra-icon">↑</div>
+        <div>
+          <h5>Upgrade entre planes</h5>
+          <p>¿Empiezas con Essential pero el club crece? Tu inversión inicial se acredita al 100% 
+             al subir de plan. Solo pagas la diferencia.</p>
+        </div>
+      </div>
+      <div class="extra">
+        <div class="extra-icon">⊘</div>
+        <div>
+          <h5>Sin permanencia</h5>
+          <p>Contratos anuales con preaviso de 30 días. Sin penalizaciones ocultas. 
+             Si no aportamos valor, te vas.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="pricing-footnote">
+      <strong>Primeras 10 horas de personalización gratis</strong> en cualquier plan. 
+      Todos los precios incluyen IVA. Pago mensual o anual con descuento.
+    </p>
+  </div>
+</section>
+
+<!-- ─── DIFFERENTIATORS ─── -->
+<section class="diff">
+  <div class="container">
+    <p class="section-label reveal">Por qué X-DATIK</p>
+    <h2 class="section-h2 reveal d1">5 RAZONES PARA<br>ELEGIR <span class="ac">X-DATIK.</span></h2>
+    <p class="section-lead reveal d2">El estándar profesional adaptado a la realidad de tu club.</p>
+
+    <div class="diff-grid">
+      <div class="diff-item reveal">
+        <div class="diff-num">01</div>
+        <div>
+          <h4>Personalización real, no plantillas</h4>
+          <p>Construimos la plataforma alrededor de tu metodología, no al revés. Cada dashboard, 
+             cada métrica y cada flujo de trabajo se adapta a cómo tu cuerpo técnico ya piensa el juego.</p>
+        </div>
+      </div>
+
+      <div class="diff-item reveal d1">
+        <div class="diff-num">02</div>
+        <div>
+          <h4>Tus datos, tu propiedad</h4>
+          <p>Trabajamos exclusivamente con los datos que tu club genera: chip GPS, sistema de cámara, 
+             metodología propia. Sin datos genéricos de terceros. Tus insights, tu ventaja competitiva.</p>
+        </div>
+      </div>
+
+      <div class="diff-item reveal d2">
+        <div class="diff-num">03</div>
+        <div>
+          <h4>IA conversacional integrada</h4>
+          <p>Consulta a la plataforma en lenguaje natural: <em>"¿Qué jugadores han bajado más de TPI 
+             este mes?"</em>. Análisis instantáneo, reports automáticos y recomendaciones tácticas 
+             entrenadas con los datos de tu club.</p>
+        </div>
+      </div>
+
+      <div class="diff-item reveal d3">
+        <div class="diff-num">04</div>
+        <div>
+          <h4>Soporte sin intermediarios</h4>
+          <p>Contacto directo con el equipo de producto. Sin tickets perdidos en colas eternas, 
+             sin call centers, sin sub-contratas. Cuando llamas, hablas con quien conoce tu plataforma.</p>
+        </div>
+      </div>
+
+      <div class="diff-item reveal d2">
+        <div class="diff-num">05</div>
+        <div>
+          <h4>Evoluciona contigo</h4>
+          <p>Mantenimiento continuo y desarrollo a medida incluidos en cada plan. La plataforma 
+             crece con tu club: nuevas funcionalidades, integraciones a medida y mejoras constantes 
+             sin coste adicional.</p>
+        </div>
+      </div>
+
+      <div class="diff-item reveal d3">
+        <div class="diff-num">+</div>
+        <div>
+          <h4>Visión de ecosistema</h4>
+          <p>Hoy X-DATIK Club. Mañana Analytics y Live para análisis profesional avanzado. 
+             Al sumarte ahora, accedes al ecosistema completo a medida que se construye.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ROADMAP ─── -->
+<section class="roadmap" id="roadmap">
+  <div class="container">
+    <div class="roadmap-header">
+      <p class="section-label reveal">Visión a largo plazo</p>
+      <h2 class="section-h2 reveal d1">EL FUTURO DE<br><span class="ac">X-DATIK</span></h2>
+      <p class="section-lead reveal d2">
+        Hoy somos plataforma de club. Mañana cubrimos el ecosistema completo del análisis 
+        deportivo profesional.
+      </p>
+    </div>
+
+    <div class="roadmap-timeline">
+      <div class="roadmap-item">
+        <div class="roadmap-card now reveal">
+          <div class="roadmap-status live">⚡ Disponible ahora</div>
+          <h3>X-DATIK <span class="ac">CLUB</span></h3>
+          <p>Plataforma personalizada para cada club. Datos físicos, tácticos e IA conversacional. 
+             Lo que estás viendo ahora.</p>
+        </div>
+        <div class="roadmap-dot now"></div>
+        <div class="roadmap-spacer"></div>
+      </div>
+
+      <div class="roadmap-item right">
+        <div class="roadmap-spacer"></div>
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-card reveal d1">
+          <div class="roadmap-status coming">◷ Próximamente · 2026</div>
+          <h3>X-DATIK <span class="ac">ANALYTICS</span></h3>
+          <p>Datos propietarios de competiciones profesionales. Software de análisis avanzado 
+             con base de datos masiva. Para staff técnico que quiere ver el panorama completo, 
+             no solo su propio club.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-card reveal d2">
+          <div class="roadmap-status future">⬢ Futuro · 2027</div>
+          <h3>X-DATIK <span class="ac">LIVE</span></h3>
+          <p>Análisis en directo durante el partido. Decisiones tácticas en tiempo real con datos 
+             en vivo. Para clubes que quieren ganar la ventaja competitiva en los 90 minutos que importan.</p>
+        </div>
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-spacer"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DEMO / CTA ─── -->
+<section class="demo" id="demo">
+  <div class="container">
+    <div class="demo-grid">
+      <div class="demo-left">
+        <p class="section-label reveal">Contacto</p>
+        <h2 class="reveal d1">¿LISTOS<br>PARA <span class="ac">EMPEZAR?</span></h2>
+        <p class="reveal d2">
+          Solicita una demo personalizada de 30 minutos. Te enseñamos la plataforma en vivo 
+          con datos similares al perfil de tu club. Sin compromiso, sin presión comercial.
+        </p>
+
+        <ul class="demo-bullets">
+          <li class="reveal d2">Demo en vivo sobre tus casos reales</li>
+          <li class="reveal d3">Conversación con el equipo de producto, no con un comercial</li>
+          <li class="reveal d3">Presupuesto adaptado a tu club</li>
+          <li class="reveal d4">Sin compromiso ni permanencia</li>
+        </ul>
+      </div>
+
+      <div class="demo-form reveal d2">
+        <div class="form-tag">Formulario seguro</div>
+        <div class="form-title">Solicitar Demo</div>
+
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Nombre *</label>
+              <input type="text" id="name" name="name" required placeholder="Tu nombre"/>
+            </div>
+            <div class="form-group">
+              <label for="role">Rol</label>
+              <input type="text" id="role" name="role" placeholder="Director técnico, presidente..."/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="club">Club *</label>
+            <input type="text" id="club" name="club" required placeholder="Nombre del club"/>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required placeholder="tu@email.com"/>
+            </div>
+            <div class="form-group">
+              <label for="phone">Teléfono</label>
+              <input type="tel" id="phone" name="phone" placeholder="+34"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="plan">Plan de interés</label>
+            <select id="plan" name="plan">
+              <option value="">Aún no lo sé</option>
+              <option value="essential">Essential — 595€/mes</option>
+              <option value="pro">Pro — 1.195€/mes</option>
+              <option value="elite">Elite — desde 1.795€/mes</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Cuéntanos brevemente</label>
+            <textarea id="message" name="message" placeholder="¿Qué problemas quieres resolver con datos? ¿Cuántos equipos tenéis?"></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">Enviar solicitud →</button>
+
+          <p class="form-privacy">
+            Al enviar, aceptas que te contactemos vía email o teléfono.<br>
+            Tus datos no se comparten con terceros.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section class="faq">
+  <div class="container">
+    <div style="text-align:center;max-width:720px;margin:0 auto">
+      <p class="section-label reveal" style="justify-content:center">Preguntas frecuentes</p>
+      <h2 class="section-h2 reveal d1">DUDAS<br><span class="ac">RESUELTAS</span></h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-question">¿Por qué un setup inicial? <span class="icn">+</span></div>
+        <div class="faq-answer">
+          Porque tu plataforma se personaliza desde el primer día: importamos tus datos históricos, 
+          adaptamos terminología a tu metodología, configuramos roles del staff, entrenamos al equipo. 
+          No es una suscripción genérica — es una herramienta hecha para tu club.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">¿Qué pasa si necesito más horas de desarrollo? <span class="icn">+</span></div>
+        <div class="faq-answer">
+          Las primeras 10 horas de personalización son gratis. Después, paquetes de 10h, 25h o 50h a 100€/h. 
+          Antes de cualquier proyecto acordamos un plan de horas con desviación máxima del 5%. 
+          Si gastamos menos, pagas menos.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">¿Dónde están alojados mis datos? <span class="icn">+</span></div>
+        <div class="faq-answer">
+          En servidores en la Unión Europea, cumpliendo RGPD. Backups cifrados diarios. 
+          Acceso solo para personal autorizado de tu club. Los datos son tuyos — puedes 
+          exportarlos en cualquier momento.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">¿Funciona con cualquier chip GPS o cámara? <span class="icn">+</span></div>
+        <div class="faq-answer">
+          Soportamos los formatos más extendidos en el mercado. Si tu proveedor tiene un formato 
+          propio, lo integramos en las horas de onboarding. Lo más común es que ya esté soportado 
+          de fábrica.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">¿Tengo que comprometerme a un año? <span class="icn">+</span></div>
+        <div class="faq-answer">
+          No. Trabajamos con contratos anuales pero con preaviso de 30 días. 
+          Si no estás satisfecho, te puedes ir sin penalizaciones. La confianza se gana, no se impone.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">¿Qué tipo de club encaja mejor con X-DATIK? <span class="icn">+</span></div>
+        <div class="faq-answer">
+          Trabajamos con clubes de cualquier categoría que quieren profesionalizar su análisis de datos: 
+          desde cantera y fútbol base hasta primera plantilla profesional. Lo importante no es el tamaño, 
+          sino tener una metodología clara y voluntad de tomar decisiones con respaldo de datos. 
+          En la llamada inicial te diremos honestamente si encajamos.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-name" style="font-family:var(--fd);font-weight:900;font-size:28px;color:var(--white);letter-spacing:0.04em">X-DATIK</div>
+      <p>Football Performance Intelligence. Plataforma personalizada de datos físicos y tácticos para clubes de fútbol.</p>
+    </div>
+
+    <div class="footer-col">
+      <h5>Producto</h5>
+      <a href="#features">Plataforma</a>
+      <a href="#pricing">Planes</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="https://app.xdatik.com">Acceder</a>
+    </div>
+
+    <div class="footer-col">
+      <h5>Empresa</h5>
+      <a href="#about">Quiénes somos</a>
+      <a href="#demo">Contacto</a>
+      <a href="mailto:lluc@xdatik.com">lluc@xdatik.com</a>
+    </div>
+
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <a href="#">Aviso legal</a>
+      <a href="#">Política de privacidad</a>
+      <a href="#">Cookies</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div>© 2026 X-DATIK · Todos los derechos reservados</div>
+    <div class="status">Plataforma operativa</div>
+  </div>
+</footer>
+
+<script>
+  // Reveal animations
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('show');
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Nav toggle (mobile)
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  if (navToggle) {
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+  }
+
+  // FAQ toggle
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => item.classList.toggle('open'));
+  });
+
+  // Form submission
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const subject = encodeURIComponent(`Solicitud de Demo X-DATIK — ${data.get('club')}`);
+      const body = encodeURIComponent(
+        `Nombre: ${data.get('name')}\n` +
+        `Rol: ${data.get('role') || '—'}\n` +
+        `Club: ${data.get('club')}\n` +
+        `Email: ${data.get('email')}\n` +
+        `Teléfono: ${data.get('phone') || '—'}\n` +
+        `Plan de interés: ${data.get('plan') || '—'}\n\n` +
+        `Mensaje:\n${data.get('message') || '—'}`
+      );
+      window.location.href = `mailto:lluc@xdatik.com?subject=${subject}&body=${body}`;
+    });
+  }
+</script>
+
+</body>
+</html>
