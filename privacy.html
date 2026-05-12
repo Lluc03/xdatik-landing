@@ -140,6 +140,10 @@
       padding: 1.5rem 2rem;
       margin-bottom: 3rem;
       border-radius: 2px;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 0 1.5rem;
+      align-items: start;
     }
     .toc-title {
       font-family: 'JetBrains Mono', monospace;
@@ -148,7 +152,7 @@
       letter-spacing: 0.1em;
       color: var(--cyan);
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      padding-top: 0.15rem;
     }
     .toc ol {
       padding-left: 0;
@@ -157,7 +161,10 @@
       grid-template-columns: 1fr 1fr;
       gap: 0.25rem 2rem;
     }
-    @media(max-width: 600px) { .toc ol { grid-template-columns: 1fr; } }
+    @media(max-width: 600px) {
+      .toc { grid-template-columns: 1fr; }
+      .toc ol { grid-template-columns: 1fr; }
+    }
     .toc li { font-size: 0.875rem; color: var(--light); }
     .toc a { color: var(--light); text-decoration: none; transition: color 0.2s; }
     .toc a:hover { color: var(--cyan); }
