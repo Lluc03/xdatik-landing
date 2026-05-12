@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aviso Legal — X-DATIK</title>
+  <meta name="description" content="Aviso Legal de X-Datik Technologies S.L. Condiciones de uso del sitio web xdatik.com.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#020812;--deep:#050d1a;--panel:#0a1628;--cyan:#00c8ff;
+      --white:#f0f6ff;--light:#94a3b8;--ok:#34d399;--danger:#f87171;
+      --border:rgba(0,200,255,0.10);--border-mid:rgba(0,200,255,0.18);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--ink);color:var(--white);font-family:'Barlow',sans-serif;font-weight:400;font-size:16px;line-height:1.7;min-height:100vh;}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
+    nav{position:sticky;top:0;z-index:100;background:rgba(2,8,18,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between;}
+    .nav-logo{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:0.08em;color:var(--white);text-decoration:none;}
+    .nav-logo span{color:var(--cyan);}
+    .nav-back{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--light);text-decoration:none;letter-spacing:0.05em;transition:color 0.2s;}
+    .nav-back:hover{color:var(--cyan);}
+    .page-header{position:relative;padding:4rem 2rem 3rem;border-bottom:1px solid var(--border);background:linear-gradient(180deg,var(--deep) 0%,var(--ink) 100%);overflow:hidden;}
+    .page-header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,200,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,200,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+    .header-inner{max-width:860px;margin:0 auto;position:relative;}
+    .doc-tag{font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:600;letter-spacing:0.12em;color:var(--cyan);text-transform:uppercase;margin-bottom:1rem;display:block;}
+    .page-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2rem,5vw,3rem);letter-spacing:-0.01em;line-height:1.1;color:var(--white);margin-bottom:1rem;}
+    .page-meta{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--light);letter-spacing:0.04em;}
+    .page-meta span{color:var(--cyan);margin:0 0.5rem;}
+    .layout{max-width:860px;margin:0 auto;padding:3rem 2rem 6rem;position:relative;z-index:1;}
+    .toc{background:var(--panel);border:1px solid var(--border-mid);border-left:3px solid var(--cyan);padding:1.5rem 2rem;margin-bottom:3rem;border-radius:2px;}
+    .toc-title{font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.1em;color:var(--cyan);text-transform:uppercase;margin-bottom:1rem;}
+    .toc ol{padding-left:1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:0.25rem 2rem;}
+    @media(max-width:600px){.toc ol{grid-template-columns:1fr;}}
+    .toc li{font-size:0.875rem;color:var(--light);}
+    .toc a{color:var(--light);text-decoration:none;transition:color 0.2s;}
+    .toc a:hover{color:var(--cyan);}
+    .section{margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid var(--border);}
+    .section:last-child{border-bottom:none;}
+    .section-number{font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--cyan);letter-spacing:0.1em;margin-bottom:0.5rem;display:block;}
+    h2{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.5rem;letter-spacing:0.02em;color:var(--white);margin-bottom:1.25rem;}
+    h3{font-family:'Barlow',sans-serif;font-weight:600;font-size:1rem;color:var(--white);margin:1.5rem 0 0.75rem;}
+    p{color:var(--light);margin-bottom:1rem;font-size:0.9375rem;}
+    p strong{color:var(--white);font-weight:600;}
+    ul,ol{padding-left:1.25rem;margin-bottom:1rem;}
+    li{color:var(--light);font-size:0.9375rem;margin-bottom:0.4rem;}
+    li strong{color:var(--white);}
+    a{color:var(--cyan);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    .info-box{background:rgba(0,200,255,0.05);border:1px solid var(--border-mid);border-left:3px solid var(--cyan);padding:1.25rem 1.5rem;margin:1.5rem 0;border-radius:2px;}
+    .info-box p{margin-bottom:0;}
+    .id-card{background:var(--panel);border:1px solid var(--border-mid);padding:1.5rem;margin:1.5rem 0;border-radius:2px;}
+    .id-row{display:flex;gap:1rem;padding:0.5rem 0;border-bottom:1px solid var(--border);font-size:0.875rem;}
+    .id-row:last-child{border-bottom:none;}
+    .id-label{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--cyan);letter-spacing:0.05em;min-width:160px;padding-top:0.1rem;}
+    .id-value{color:var(--light);}
+    footer{border-top:1px solid var(--border);padding:2rem;text-align:center;}
+    .footer-links{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;}
+    .footer-links a{font-size:0.8125rem;color:var(--light);text-decoration:none;transition:color 0.2s;}
+    .footer-links a:hover{color:var(--cyan);}
+    .footer-copy{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(148,163,184,0.5);letter-spacing:0.05em;}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://xdatik.com" class="nav-logo">X-<span>DATIK</span></a>
+  <a href="https://xdatik.com" class="nav-back">← Volver a inicio</a>
+</nav>
+
+<header class="page-header">
+  <div class="header-inner">
+    <span class="doc-tag">// doc-002 · LSSICE</span>
+    <h1 class="page-title">Aviso Legal</h1>
+    <p class="page-meta">
+      Última actualización<span>·</span>12 de mayo de 2025
+      <span>·</span>Versión 1.0
+    </p>
+  </div>
+</header>
+
+<main class="layout">
+
+  <nav class="toc" aria-label="Tabla de contenidos">
+    <p class="toc-title">// índice</p>
+    <ol>
+      <li><a href="#titular">Titular del sitio web</a></li>
+      <li><a href="#objeto">Objeto y ámbito</a></li>
+      <li><a href="#uso">Condiciones de uso</a></li>
+      <li><a href="#propiedad">Propiedad intelectual e industrial</a></li>
+      <li><a href="#responsabilidad">Limitación de responsabilidad</a></li>
+      <li><a href="#enlaces">Enlaces a terceros</a></li>
+      <li><a href="#legislacion">Legislación aplicable</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1. TITULAR -->
+  <section class="section" id="titular">
+    <span class="section-number">// 01</span>
+    <h2>Titular del sitio web</h2>
+    <p>En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y Comercio Electrónico (LSSICE), se informa de los datos identificativos del titular de este sitio web:</p>
+    <div class="id-card">
+      <div class="id-row"><span class="id-label">RAZÓN SOCIAL</span><span class="id-value">X-Datik Technologies S.L.</span></div>
+      <div class="id-row"><span class="id-label">NIF</span><span class="id-value">B27537000</span></div>
+      <div class="id-row"><span class="id-label">DOMICILIO SOCIAL</span><span class="id-value">Carrer Cardenal Gomà, 31, 17178 La Vall d'en Bas (Girona), España</span></div>
+      <div class="id-row"><span class="id-label">INSCRIPCIÓN</span><span class="id-value">Registro Mercantil de Girona (en trámite de inscripción)</span></div>
+      <div class="id-row"><span class="id-label">EMAIL</span><span class="id-value"><a href="mailto:lluc@xdatik.com">lluc@xdatik.com</a></span></div>
+      <div class="id-row"><span class="id-label">WEB</span><span class="id-value"><a href="https://xdatik.com">xdatik.com</a></span></div>
+    </div>
+  </section>
+
+  <!-- 2. OBJETO -->
+  <section class="section" id="objeto">
+    <span class="section-number">// 02</span>
+    <h2>Objeto y ámbito de aplicación</h2>
+    <p>El presente Aviso Legal regula el acceso y uso del sitio web <strong>xdatik.com</strong> y <strong>www.xdatik.com</strong> (en adelante, "el Sitio Web"), titularidad de X-Datik Technologies S.L.</p>
+    <p>El acceso al Sitio Web implica la aceptación de las presentes condiciones. Si no estás de acuerdo con ellas, debes abstenerte de usar el Sitio Web.</p>
+    <p>Este aviso no regula el uso de la plataforma <strong>app.xdatik.com</strong>, que está sujeta a los <a href="/terms">Términos de Servicio</a> específicos aceptados por los usuarios registrados.</p>
+  </section>
+
+  <!-- 3. USO -->
+  <section class="section" id="uso">
+    <span class="section-number">// 03</span>
+    <h2>Condiciones de uso</h2>
+    <p>El usuario se compromete a hacer un uso adecuado y lícito del Sitio Web, de conformidad con la legislación vigente, el presente Aviso Legal y las buenas costumbres y el orden público.</p>
+    <p>Queda expresamente prohibido:</p>
+    <ul>
+      <li>Usar el Sitio Web con fines ilegales o no autorizados.</li>
+      <li>Introducir o difundir contenidos falsos, ambiguos o incorrectos.</li>
+      <li>Realizar acciones que puedan dañar, inutilizar, sobrecargar o deteriorar el Sitio Web o impedir su normal uso.</li>
+      <li>Intentar obtener acceso no autorizado a cualquier parte del Sitio Web o de sus sistemas relacionados.</li>
+      <li>Suplantar la identidad de otra persona o entidad.</li>
+      <li>Usar técnicas de scraping, crawling automatizado u otras técnicas de extracción masiva de datos sin autorización escrita.</li>
+    </ul>
+    <p>X-Datik Technologies S.L. se reserva el derecho de denegar o retirar el acceso al Sitio Web, en cualquier momento y sin necesidad de preaviso, a los usuarios que incumplan las presentes condiciones.</p>
+  </section>
+
+  <!-- 4. PROPIEDAD INTELECTUAL -->
+  <section class="section" id="propiedad">
+    <span class="section-number">// 04</span>
+    <h2>Propiedad intelectual e industrial</h2>
+    <p>Todos los contenidos del Sitio Web — incluyendo, sin carácter limitativo, textos, imágenes, gráficos, logotipos, iconos, botones, software, nombres comerciales, marcas, diseños industriales y cualquier otro signo susceptible de utilización industrial y comercial — son titularidad de X-Datik Technologies S.L. o de sus licenciantes, y están protegidos por las leyes españolas e internacionales de propiedad intelectual e industrial.</p>
+    <p>Queda expresamente prohibida cualquier reproducción, distribución, comunicación pública, transformación o cualquier otra forma de explotación, total o parcial, de los contenidos del Sitio Web sin autorización previa y por escrito de X-Datik Technologies S.L.</p>
+    <p>La denominación comercial <strong>X-DATIK</strong> y el logotipo asociado son signos distintivos de X-Datik Technologies S.L. Su uso sin autorización previa constituye infracción de los derechos de propiedad industrial.</p>
+  </section>
+
+  <!-- 5. RESPONSABILIDAD -->
+  <section class="section" id="responsabilidad">
+    <span class="section-number">// 05</span>
+    <h2>Limitación de responsabilidad</h2>
+
+    <h3>Disponibilidad del servicio</h3>
+    <p>X-Datik Technologies S.L. no garantiza la disponibilidad y continuidad ininterrumpida del Sitio Web. Cuando sea razonablemente posible, se advertirá previamente de las interrupciones. X-Datik Technologies S.L. no será responsable por los daños y perjuicios que pudieran producirse como consecuencia de la falta de disponibilidad o accesibilidad al Sitio Web.</p>
+
+    <h3>Exactitud de la información</h3>
+    <p>X-Datik Technologies S.L. procura que la información publicada en el Sitio Web sea exacta y esté actualizada. No obstante, no garantiza la exhaustividad ni la veracidad absoluta de los contenidos. La información tiene carácter meramente orientativo y no constituye oferta vinculante salvo que se indique expresamente lo contrario.</p>
+
+    <h3>Uso indebido</h3>
+    <p>X-Datik Technologies S.L. no será responsable del uso indebido que los usuarios hagan del Sitio Web ni de las consecuencias que se deriven de tal uso.</p>
+
+    <div class="info-box">
+      <p>Los precios y características de los planes publicados en el Sitio Web son orientativos. La oferta definitiva y vinculante se formalizará en el contrato de prestación de servicios firmado entre las partes.</p>
+    </div>
+  </section>
+
+  <!-- 6. ENLACES -->
+  <section class="section" id="enlaces">
+    <span class="section-number">// 06</span>
+    <h2>Política de enlaces a terceros</h2>
+    <p>El Sitio Web puede contener enlaces a sitios web de terceros. X-Datik Technologies S.L. no tiene control sobre el contenido de dichos sitios y no asume ninguna responsabilidad por los daños o perjuicios que pudieran derivarse del acceso a ellos. La inclusión de un enlace no implica ni la aprobación ni la recomendación del sitio enlazado.</p>
+    <p>Si deseas incluir un enlace hacia el Sitio Web desde una web de terceros, deberás obtener autorización previa y por escrito de X-Datik Technologies S.L.</p>
+  </section>
+
+  <!-- 7. LEGISLACIÓN -->
+  <section class="section" id="legislacion">
+    <span class="section-number">// 07</span>
+    <h2>Legislación aplicable y jurisdicción</h2>
+    <p>El presente Aviso Legal se rige en todos sus extremos por la legislación española vigente. En particular:</p>
+    <ul>
+      <li><strong>Ley 34/2002</strong>, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSICE)</li>
+      <li><strong>Real Decreto Legislativo 1/1996</strong>, de 12 de abril, por el que se aprueba el Texto Refundido de la Ley de Propiedad Intelectual</li>
+      <li><strong>Ley 17/2001</strong>, de 7 de diciembre, de Marcas</li>
+      <li><strong>Reglamento (UE) 2016/679</strong> (RGPD) y <strong>Ley Orgánica 3/2018</strong> (LOPDGDD)</li>
+    </ul>
+    <p>Para la resolución de cualquier controversia derivada del acceso o uso del Sitio Web, las partes se someten, con renuncia expresa a cualquier otro fuero que pudiera corresponderles, a los Juzgados y Tribunales de la ciudad de <strong>Girona</strong>, salvo que la normativa de consumidores y usuarios aplicable imponga un fuero diferente.</p>
+  </section>
+
+  <!-- 8. CONTACTO -->
+  <section class="section" id="contacto">
+    <span class="section-number">// 08</span>
+    <h2>Contacto</h2>
+    <p>Para cualquier consulta relacionada con el presente Aviso Legal, puedes dirigirte a:</p>
+    <div class="id-card">
+      <div class="id-row"><span class="id-label">EMPRESA</span><span class="id-value">X-Datik Technologies S.L.</span></div>
+      <div class="id-row"><span class="id-label">EMAIL</span><span class="id-value"><a href="mailto:lluc@xdatik.com">lluc@xdatik.com</a></span></div>
+      <div class="id-row"><span class="id-label">DIRECCIÓN</span><span class="id-value">Carrer Cardenal Gomà, 31, 17178 La Vall d'en Bas (Girona), España</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="/legal">Aviso Legal</a>
+    <a href="/privacy">Política de Privacidad</a>
+    <a href="/cookies">Política de Cookies</a>
+    <a href="/terms">Términos de Servicio</a>
+  </div>
+  <p class="footer-copy">© 2025 X-Datik Technologies S.L. · B27537000 · La Vall d'en Bas, Girona</p>
+</footer>
+
+</body>
+</html>

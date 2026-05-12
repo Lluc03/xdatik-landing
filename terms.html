@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Términos de Servicio — X-DATIK</title>
+  <meta name="description" content="Términos de Servicio de la plataforma X-DATIK para clubes de fútbol.">
+  <meta name="robots" content="noindex, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#020812;--deep:#050d1a;--panel:#0a1628;--cyan:#00c8ff;--white:#f0f6ff;--light:#94a3b8;--ok:#34d399;--danger:#f87171;--violet:#a78bfa;--border:rgba(0,200,255,0.10);--border-mid:rgba(0,200,255,0.18);}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--ink);color:var(--white);font-family:'Barlow',sans-serif;font-size:16px;line-height:1.7;min-height:100vh;}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
+    nav{position:sticky;top:0;z-index:100;background:rgba(2,8,18,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between;}
+    .nav-logo{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.25rem;letter-spacing:0.08em;color:var(--white);text-decoration:none;}
+    .nav-logo span{color:var(--cyan);}
+    .nav-back{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--light);text-decoration:none;letter-spacing:0.05em;transition:color 0.2s;}
+    .nav-back:hover{color:var(--cyan);}
+    .page-header{position:relative;padding:4rem 2rem 3rem;border-bottom:1px solid var(--border);background:linear-gradient(180deg,var(--deep) 0%,var(--ink) 100%);overflow:hidden;}
+    .page-header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,200,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,200,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;}
+    .header-inner{max-width:860px;margin:0 auto;position:relative;}
+    .doc-tag{font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:600;letter-spacing:0.12em;color:var(--cyan);text-transform:uppercase;margin-bottom:1rem;display:block;}
+    .page-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2rem,5vw,3rem);line-height:1.1;color:var(--white);margin-bottom:1rem;}
+    .page-meta{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--light);letter-spacing:0.04em;}
+    .page-meta span{color:var(--cyan);margin:0 0.5rem;}
+    .layout{max-width:860px;margin:0 auto;padding:3rem 2rem 6rem;position:relative;z-index:1;}
+    .toc{background:var(--panel);border:1px solid var(--border-mid);border-left:3px solid var(--cyan);padding:1.5rem 2rem;margin-bottom:3rem;border-radius:2px;}
+    .toc-title{font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:600;letter-spacing:0.1em;color:var(--cyan);text-transform:uppercase;margin-bottom:1rem;}
+    .toc ol{padding-left:1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:0.25rem 2rem;}
+    @media(max-width:600px){.toc ol{grid-template-columns:1fr;}}
+    .toc li{font-size:0.875rem;color:var(--light);}
+    .toc a{color:var(--light);text-decoration:none;transition:color 0.2s;}
+    .toc a:hover{color:var(--cyan);}
+    .section{margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid var(--border);}
+    .section:last-child{border-bottom:none;}
+    .section-number{font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:600;color:var(--cyan);letter-spacing:0.1em;margin-bottom:0.5rem;display:block;}
+    h2{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.5rem;color:var(--white);margin-bottom:1.25rem;}
+    h3{font-family:'Barlow',sans-serif;font-weight:600;font-size:1rem;color:var(--white);margin:1.5rem 0 0.75rem;}
+    p{color:var(--light);margin-bottom:1rem;font-size:0.9375rem;}
+    p strong{color:var(--white);font-weight:600;}
+    ul,ol{padding-left:1.25rem;margin-bottom:1rem;}
+    li{color:var(--light);font-size:0.9375rem;margin-bottom:0.4rem;}
+    li strong{color:var(--white);}
+    a{color:var(--cyan);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    .info-box{background:rgba(0,200,255,0.05);border:1px solid var(--border-mid);border-left:3px solid var(--cyan);padding:1.25rem 1.5rem;margin:1.5rem 0;border-radius:2px;}
+    .info-box p{margin-bottom:0;}
+    .warn-box{background:rgba(248,113,113,0.05);border:1px solid rgba(248,113,113,0.2);border-left:3px solid var(--danger);padding:1.25rem 1.5rem;margin:1.5rem 0;border-radius:2px;}
+    .warn-box p{margin-bottom:0;}
+    .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;}
+    @media(max-width:700px){.plans-grid{grid-template-columns:1fr;}}
+    .plan-card{background:var(--panel);border:1px solid var(--border);padding:1.25rem;border-radius:2px;}
+    .plan-card.featured{border-color:rgba(0,200,255,0.3);}
+    .plan-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;color:var(--white);margin-bottom:0.25rem;}
+    .plan-price{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--cyan);margin-bottom:0.75rem;}
+    .plan-features{list-style:none;padding:0;}
+    .plan-features li{font-size:0.8125rem;color:var(--light);padding:0.2rem 0;border-bottom:1px solid var(--border);}
+    .plan-features li:last-child{border-bottom:none;}
+    .plan-features li::before{content:'→ ';color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.7rem;}
+    footer{border-top:1px solid var(--border);padding:2rem;text-align:center;}
+    .footer-links{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;}
+    .footer-links a{font-size:0.8125rem;color:var(--light);text-decoration:none;transition:color 0.2s;}
+    .footer-links a:hover{color:var(--cyan);}
+    .footer-copy{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:rgba(148,163,184,0.5);letter-spacing:0.05em;}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://xdatik.com" class="nav-logo">X-<span>DATIK</span></a>
+  <a href="https://xdatik.com" class="nav-back">← Volver a inicio</a>
+</nav>
+
+<header class="page-header">
+  <div class="header-inner">
+    <span class="doc-tag">// doc-004 · TÉRMINOS</span>
+    <h1 class="page-title">Términos de Servicio</h1>
+    <p class="page-meta">
+      Última actualización<span>·</span>12 de mayo de 2025
+      <span>·</span>Versión 1.0
+    </p>
+  </div>
+</header>
+
+<main class="layout">
+
+  <nav class="toc" aria-label="Tabla de contenidos">
+    <p class="toc-title">// índice</p>
+    <ol>
+      <li><a href="#definiciones">Definiciones</a></li>
+      <li><a href="#objeto">Objeto del contrato</a></li>
+      <li><a href="#planes">Planes y precios</a></li>
+      <li><a href="#obligaciones">Obligaciones de las partes</a></li>
+      <li><a href="#datos">Datos y privacidad</a></li>
+      <li><a href="#sla">Disponibilidad y SLA</a></li>
+      <li><a href="#propiedad">Propiedad intelectual</a></li>
+      <li><a href="#responsabilidad">Limitación de responsabilidad</a></li>
+      <li><a href="#duracion">Duración y resolución</a></li>
+      <li><a href="#legislacion">Legislación y jurisdicción</a></li>
+    </ol>
+  </nav>
+
+  <div class="info-box">
+    <p>Estos Términos de Servicio regulan la relación contractual entre <strong>X-Datik Technologies S.L.</strong> y el club o entidad deportiva (en adelante, el "Cliente") que contrata el acceso a la plataforma X-DATIK. La aceptación de estos términos es requisito previo para el uso del servicio.</p>
+  </div>
+
+  <!-- 1. DEFINICIONES -->
+  <section class="section" id="definiciones">
+    <span class="section-number">// 01</span>
+    <h2>Definiciones</h2>
+    <ul>
+      <li><strong>Proveedor</strong>: X-Datik Technologies S.L., NIF B27537000, con domicilio en Carrer Cardenal Gomà, 31, 17178 La Vall d'en Bas (Girona).</li>
+      <li><strong>Cliente</strong>: la entidad deportiva (club, academia, asociación) que suscribe un plan de servicio con el Proveedor.</li>
+      <li><strong>Plataforma</strong>: el software SaaS accesible en <strong>app.xdatik.com</strong>, incluyendo todas sus funcionalidades, APIs y herramientas de análisis.</li>
+      <li><strong>Usuario</strong>: cualquier persona (entrenador, analista, jugador, directivo) autorizada por el Cliente para acceder a la Plataforma.</li>
+      <li><strong>Datos del Cliente</strong>: todos los datos deportivos, estadísticos y de gestión que el Cliente introduce en la Plataforma.</li>
+      <li><strong>Setup</strong>: el proceso inicial de personalización y configuración de la Plataforma para las necesidades específicas del Cliente.</li>
+      <li><strong>Consultoría</strong>: horas de servicio profesional adicionales al mantenimiento incluido en el plan.</li>
+    </ul>
+  </section>
+
+  <!-- 2. OBJETO -->
+  <section class="section" id="objeto">
+    <span class="section-number">// 02</span>
+    <h2>Objeto del contrato</h2>
+    <p>El Proveedor se compromete a:</p>
+    <ul>
+      <li>Proporcionar acceso a la Plataforma X-DATIK según el plan contratado.</li>
+      <li>Realizar el Setup inicial de personalización según las especificaciones acordadas.</li>
+      <li>Prestar las horas de mantenimiento y soporte incluidas en el plan.</li>
+      <li>Mantener la confidencialidad de los Datos del Cliente.</li>
+      <li>Cumplir con las obligaciones de encargado del tratamiento establecidas en el DPA firmado.</li>
+    </ul>
+    <p>El servicio incluye alojamiento en servidores ubicados en la Unión Europea (Nuremberg, Alemania), backups cifrados diarios con retención de 30 días, y monitorización continua de la disponibilidad.</p>
+  </section>
+
+  <!-- 3. PLANES -->
+  <section class="section" id="planes">
+    <span class="section-number">// 03</span>
+    <h2>Planes y precios</h2>
+    <p>Todos los precios incluyen IVA y están expresados en euros (EUR).</p>
+
+    <div class="plans-grid">
+      <div class="plan-card">
+        <div class="plan-name">Essential</div>
+        <div class="plan-price">595€/mes · Setup 4.500€</div>
+        <ul class="plan-features">
+          <li>Hasta 3 equipos</li>
+          <li>Hasta 10 usuarios</li>
+          <li>10h/mes mantenimiento</li>
+          <li>Sin módulo IA</li>
+          <li>Soporte por email</li>
+        </ul>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-name">Pro ⭐</div>
+        <div class="plan-price">1.195€/mes · Setup 8.000€</div>
+        <ul class="plan-features">
+          <li>Hasta 8 equipos</li>
+          <li>Hasta 25 usuarios</li>
+          <li>10h/mes mantenimiento</li>
+          <li>IA conversacional incluida</li>
+          <li>Soporte prioritario</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Elite</div>
+        <div class="plan-price">desde 1.795€/mes · Setup desde 12.000€</div>
+        <ul class="plan-features">
+          <li>Equipos ilimitados</li>
+          <li>Usuarios ilimitados</li>
+          <li>Horas personalizadas</li>
+          <li>SLA respuesta 1h</li>
+          <li>Consultor dedicado</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Condiciones económicas</h3>
+    <ul>
+      <li><strong>Setup</strong>: pagadero en hasta 3 plazos iguales sin intereses antes de la entrega. El importe abonado se acredita íntegramente si el Cliente hace upgrade de plan.</li>
+      <li><strong>Cuota mensual</strong>: se factura el primer día de cada período. El método de pago (transferencia bancaria o domiciliación SEPA) se acuerda en el contrato individual.</li>
+      <li><strong>Consultoría adicional</strong>: 100€/hora, en paquetes de 10h, 25h o 50h. Las primeras 10 horas de personalización son gratuitas. La estimación de horas se acuerda por escrito con una desviación máxima del 5%.</li>
+      <li><strong>Precios</strong>: el Proveedor podrá revisar los precios con un preaviso mínimo de 60 días. El Cliente podrá resolver el contrato sin penalización si no acepta la revisión.</li>
+    </ul>
+  </section>
+
+  <!-- 4. OBLIGACIONES -->
+  <section class="section" id="obligaciones">
+    <span class="section-number">// 04</span>
+    <h2>Obligaciones de las partes</h2>
+
+    <h3>Obligaciones del Proveedor</h3>
+    <ul>
+      <li>Mantener la Plataforma operativa según los niveles de disponibilidad del SLA aplicable al plan contratado.</li>
+      <li>Notificar al Cliente con antelación razonable cualquier mantenimiento programado que pueda afectar a la disponibilidad.</li>
+      <li>Tratar los Datos del Cliente exclusivamente para la prestación del servicio y conforme al DPA firmado.</li>
+      <li>Mantener medidas de seguridad técnicas y organizativas adecuadas.</li>
+      <li>Proporcionar las horas de mantenimiento y soporte incluidas en el plan dentro del mes natural.</li>
+    </ul>
+
+    <h3>Obligaciones del Cliente</h3>
+    <ul>
+      <li>Abonar las cuotas en los plazos acordados.</li>
+      <li>Usar la Plataforma de conformidad con estos Términos y la legislación vigente.</li>
+      <li>Gestionar adecuadamente el acceso de sus Usuarios (altas, bajas, contraseñas seguras).</li>
+      <li>No compartir credenciales de acceso entre diferentes personas.</li>
+      <li>Contar con las autorizaciones legales necesarias para introducir datos de sus jugadores (incluyendo menores de edad) en la Plataforma.</li>
+      <li>Notificar al Proveedor cualquier incidencia de seguridad o uso no autorizado que detecte.</li>
+      <li>No intentar acceder a datos de otras organizaciones alojadas en la Plataforma.</li>
+    </ul>
+
+    <h3>Usos prohibidos</h3>
+    <ul>
+      <li>Ingeniería inversa, descompilación o cualquier intento de extraer el código fuente de la Plataforma.</li>
+      <li>Reventa o sublicencia del acceso a la Plataforma a terceros sin autorización escrita.</li>
+      <li>Uso de la Plataforma para actividades ilegales o que vulneren derechos de terceros.</li>
+      <li>Introducción masiva de datos mediante scripts automatizados sin autorización previa.</li>
+    </ul>
+  </section>
+
+  <!-- 5. DATOS -->
+  <section class="section" id="datos">
+    <span class="section-number">// 05</span>
+    <h2>Datos y privacidad</h2>
+    <p>En el contexto del servicio, el Cliente actúa como <strong>Responsable del Tratamiento</strong> y el Proveedor como <strong>Encargado del Tratamiento</strong> de los datos personales de los jugadores y usuarios introducidos en la Plataforma.</p>
+    <p>Esta relación se formaliza mediante un <strong>Acuerdo de Tratamiento de Datos (DPA)</strong> que se firma conjuntamente con el contrato de servicio. El DPA forma parte inseparable de estos Términos.</p>
+    <p>El Proveedor se compromete a:</p>
+    <ul>
+      <li>Tratar los datos únicamente según instrucciones documentadas del Cliente.</li>
+      <li>No ceder los datos a terceros salvo obligación legal o subencargados autorizados (listados en el DPA).</li>
+      <li>Eliminar o devolver todos los datos al Cliente en un plazo de 30 días tras la resolución del contrato.</li>
+      <li>Notificar al Cliente cualquier brecha de seguridad que afecte a sus datos en el menor tiempo posible.</li>
+    </ul>
+    <p>Para más información, consulta nuestra <a href="/privacy">Política de Privacidad</a> y el DPA disponible bajo solicitud.</p>
+  </section>
+
+  <!-- 6. SLA -->
+  <section class="section" id="sla">
+    <span class="section-number">// 06</span>
+    <h2>Disponibilidad y SLA</h2>
+
+    <h3>Disponibilidad objetivo</h3>
+    <ul>
+      <li><strong>Essential y Pro</strong>: disponibilidad objetivo del <strong>99,5%</strong> mensual (excluye mantenimientos programados notificados con ≥24h de antelación).</li>
+      <li><strong>Elite</strong>: disponibilidad objetivo del <strong>99,9%</strong> mensual, con SLA de respuesta a incidencias críticas de <strong>1 hora</strong>.</li>
+    </ul>
+
+    <h3>Soporte</h3>
+    <ul>
+      <li><strong>Essential y Pro</strong>: soporte por email en horario laboral (L-V 9:00-18:00 CET). Tiempo de respuesta objetivo: 24h laborables.</li>
+      <li><strong>Elite</strong>: consultor dedicado, canal directo. Tiempo de respuesta objetivo: 1h en incidencias críticas, 4h en el resto.</li>
+    </ul>
+
+    <h3>Mantenimientos programados</h3>
+    <p>Los mantenimientos programados se notificarán con un mínimo de 24 horas de antelación por email. Se realizarán preferentemente en horario de baja actividad (00:00-06:00 CET).</p>
+
+    <div class="warn-box">
+      <p>El Proveedor no garantiza la disponibilidad ininterrumpida del servicio ante causas de fuerza mayor, fallos de terceros proveedores de infraestructura o ataques externos de gran escala. En estos casos, el Proveedor actuará con la máxima diligencia posible para restaurar el servicio.</p>
+    </div>
+  </section>
+
+  <!-- 7. PROPIEDAD INTELECTUAL -->
+  <section class="section" id="propiedad">
+    <span class="section-number">// 07</span>
+    <h2>Propiedad intelectual</h2>
+    <p>El Proveedor es titular exclusivo de todos los derechos de propiedad intelectual sobre la Plataforma, su código, diseño, arquitectura y documentación. El contrato de servicio otorga al Cliente una <strong>licencia de uso no exclusiva, intransferible y limitada</strong> a la vigencia del contrato.</p>
+    <p>Los <strong>Datos del Cliente</strong> son y seguirán siendo propiedad exclusiva del Cliente. El Proveedor no adquiere ningún derecho sobre ellos más allá del necesario para prestar el servicio.</p>
+    <p>Las personalizaciones y desarrollos específicos realizados para el Cliente durante el Setup son propiedad del Proveedor salvo que se acuerde expresamente lo contrario por escrito.</p>
+  </section>
+
+  <!-- 8. RESPONSABILIDAD -->
+  <section class="section" id="responsabilidad">
+    <span class="section-number">// 08</span>
+    <h2>Limitación de responsabilidad</h2>
+    <p>La responsabilidad total del Proveedor frente al Cliente derivada de este contrato, por cualquier concepto, no superará el importe equivalente a <strong>tres (3) mensualidades</strong> del plan contratado en el momento del incidente.</p>
+    <p>El Proveedor no será responsable en ningún caso de:</p>
+    <ul>
+      <li>Lucro cesante, pérdida de negocio o pérdida de datos del Cliente derivadas del uso o la imposibilidad de uso de la Plataforma.</li>
+      <li>Decisiones deportivas, técnicas o de gestión tomadas en base a los análisis proporcionados por la Plataforma.</li>
+      <li>Daños causados por el uso inadecuado de la Plataforma por parte del Cliente o sus Usuarios.</li>
+      <li>Pérdidas causadas por terceros proveedores de infraestructura (Hetzner, Cloudflare, etc.) fuera del control razonable del Proveedor.</li>
+    </ul>
+    <p>Esta limitación no aplica en caso de dolo o negligencia grave del Proveedor.</p>
+  </section>
+
+  <!-- 9. DURACIÓN -->
+  <section class="section" id="duracion">
+    <span class="section-number">// 09</span>
+    <h2>Duración y resolución</h2>
+    <p>El contrato tiene una <strong>vigencia inicial de 12 meses</strong> desde la fecha de entrega del Setup. Transcurrido este período, se renueva automáticamente por períodos anuales salvo preaviso de resolución.</p>
+
+    <h3>Preaviso de resolución</h3>
+    <p>Cualquiera de las partes puede resolver el contrato con un <strong>preaviso mínimo de 30 días naturales</strong> antes del fin del período en curso, comunicado por email a la dirección de contacto del contrato.</p>
+
+    <h3>Resolución por incumplimiento</h3>
+    <ul>
+      <li><strong>Por el Proveedor</strong>: en caso de impago de dos o más cuotas consecutivas, uso fraudulento o incumplimiento grave de los Términos, previa notificación y plazo de subsanación de 15 días.</li>
+      <li><strong>Por el Cliente</strong>: en caso de incumplimiento grave del Proveedor que no sea subsanado en 15 días desde la notificación.</li>
+    </ul>
+
+    <h3>Efectos de la resolución</h3>
+    <p>Tras la resolución del contrato, el Proveedor pondrá a disposición del Cliente sus datos en formato exportable durante un plazo de 30 días, transcurrido el cual procederá a su eliminación definitiva de todos los sistemas.</p>
+  </section>
+
+  <!-- 10. LEGISLACIÓN -->
+  <section class="section" id="legislacion">
+    <span class="section-number">// 10</span>
+    <h2>Legislación aplicable y jurisdicción</h2>
+    <p>El presente contrato se rige por la <strong>legislación española</strong> vigente. Para la resolución de cualquier controversia, las partes se someten expresamente a los <strong>Juzgados y Tribunales de Girona</strong>, con renuncia a cualquier otro fuero que pudiera corresponderles.</p>
+    <p>Antes de acudir a la vía judicial, las partes se comprometen a intentar resolver la controversia de forma amistosa mediante comunicación escrita en un plazo máximo de 30 días.</p>
+
+    <div class="info-box" style="margin-top:2rem;">
+      <p>¿Tienes preguntas sobre estos Términos? Escríbenos a <a href="mailto:lluc@xdatik.com">lluc@xdatik.com</a> antes de firmar cualquier contrato.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="/legal">Aviso Legal</a>
+    <a href="/privacy">Política de Privacidad</a>
+    <a href="/cookies">Política de Cookies</a>
+    <a href="/terms">Términos de Servicio</a>
+  </div>
+  <p class="footer-copy">© 2025 X-Datik Technologies S.L. · B27537000 · La Vall d'en Bas, Girona</p>
+</footer>
+
+</body>
+</html>
